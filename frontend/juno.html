@@ -6,25 +6,109 @@
   <title>Juno | Your Rights Ally</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes pulseRing {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    .pulse-ring {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(99, 102, 241, 0.4);
+      border-radius: 50%;
+      animation: pulseRing 1.5s ease-out infinite;
+      z-index: 0;
+    }
+
+    .floating-icon {
+      animation: float 4s ease-in-out infinite;
+      position: absolute;
+      font-size: 1.75rem;
+      opacity: 0.8;
+    }
+
+    df-messenger {
+      --df-messenger-bot-message: #eef2ff;
+      --df-messenger-button-titlebar-color: #4f46e5;
+      --df-messenger-chat-background-color: #ffffff;
+      --df-messenger-font-color: #333;
+      --df-messenger-send-icon: #4f46e5;
+      --df-messenger-user-message: #e0e7ff;
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 1000;
+      animation: float 3s ease-in-out infinite;
+    }
+
     body {
       background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
       font-family: 'Inter', sans-serif;
-    }
-    iframe {
-      border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      overflow-x: hidden;
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-4">
-  <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full text-center">
-    <h1 class="text-3xl font-bold text-gray-800 mb-2">Meet <span class="text-indigo-600">Juno</span></h1>
-    <p class="text-gray-500 mb-6">Your rights, your voice — simplified with care.</p>
+<body class="flex items-center justify-center min-h-screen px-4 relative">
+
+  <!-- Floating Icons -->
+  <div class="floating-icon" style="top: 10%; left: 10%;">💟</div>
+  <div class="floating-icon" style="top: 20%; right: 12%;">🛡️</div>
+  <div class="floating-icon" style="bottom: 18%; left: 15%;">🚺</div>
+  <div class="floating-icon" style="bottom: 10%; right: 10%;">💬</div>
+
+  <!-- Main Card with Animated Icon -->
+  <div class="relative z-10 bg-white p-10 rounded-3xl shadow-2xl max-w-md w-full text-center transform transition duration-300 hover:scale-105 animate-fade-in-scale">
     
-    <div class="flex justify-center">
-        <iframe height="430" width="350" src="https://bot.dialogflow.com/b105fc7d-588f-4cb7-8c4c-c720788b1826"></iframe>
+    <!-- Pulse Shield -->
+    <div class="relative flex justify-center mb-4">
+      <div class="pulse-ring"></div>
+      <div class="z-10 bg-indigo-600 text-white p-4 rounded-full shadow-lg text-3xl">
+        🛡️
+      </div>
     </div>
-    
+
+    <h1 class="text-4xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 text-transparent bg-clip-text mb-3 hover:drop-shadow-lg transition duration-300">
+      Meet Juno
+    </h1>
+    <p class="text-gray-600 text-lg mb-6 font-medium">Your rights, your voice — simplified with care.</p>
+    <p class="text-sm text-gray-400 italic">Click the chat icon in the corner to talk to Juno!</p>
   </div>
+
+  <!-- Dialogflow Chatbot -->
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <df-messenger
+    chat-icon="https://i.postimg.cc/ZKDWwRgG/07-Oct24-Anis-Free-Upload.png"
+    intent="WELCOME"
+    chat-title="Juno"
+    agent-id="b105fc7d-588f-4cb7-8c4c-c720788b1826"
+    language-code="en"
+  ></df-messenger>
 </body>
 </html>
