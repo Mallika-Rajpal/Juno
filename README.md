@@ -25,7 +25,7 @@
 
 | Layer       | Tech                          |
 |-------------|-------------------------------|
-| AI/NLP      | Dialogflow CX / ES            |
+| AI/NLP      | Dialogflow ES                 |
 | Backend     | Node.js + Express.js          |
 | Hosting     | Render (Free Tier)            |
 | Integration | Web iframe Embed              |
